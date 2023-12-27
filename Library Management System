@@ -1,0 +1,157 @@
+import java.util.*;
+
+class LibraryManagement
+ {
+    // create array to add more than 1 book
+    public static int[] SrNo = new int[5];
+    public static String[] Title = new String[5];
+    public static String[] Author = new String[5];
+    public static boolean[] isAvailable = new boolean[5];
+
+    public static void main(String[] args) 
+    {
+        // while loop for exexute our switch statement upto exit 
+        boolean exit = false;
+        while(!exit)
+        {
+
+        
+        Scanner sc = new Scanner(System.in);
+        System.out.println("*************Library Management System***********");
+        System.out.println("1. Add Book");
+        System.out.println("2. Display Books");
+        System.out.println("3. Borrow Book");
+        System.out.println("4. Return Book");
+        System.out.println("0. Exit");
+        System.out.println("-------------------------------------");
+        System.out.println("Enter your Choice:");
+        int ch = sc.nextInt();
+        
+        // display all the cases
+        switch (ch)
+         {
+            case 1:
+            //call the insBook() function
+                insBook();
+                break;
+            case 2:
+            //it call the displayBook function
+                displayBook();
+                break;
+            case 3:
+            //it will call the borrow book function
+                borrowBook();
+                break;
+            case 4:
+            // it will call the returnBook function
+                returnBook();
+                break;
+            case 0:
+                exit = true;
+                break;
+
+            default:
+                System.out.println("Enter valid choice:");
+        }
+    }
+    }
+    // this function used for the insert all the data from user which he/she want to add
+    public static void insBook() 
+    {
+        
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < 2; i++) 
+        {
+            System.out.println("You can add any 2 books");
+            System.out.println("-------------------------------");
+
+            // take srNo from user
+            System.out.println("Enter a Sr.no of book:");
+            SrNo[i] = sc.nextInt();
+            sc.nextLine();
+
+            // take name of book from user
+            System.out.println("Enter Book name:");
+            Title[i] = sc.nextLine();
+
+            // take author name from user
+            System.out.println("Enter Author name:");
+            Author[i] = sc.nextLine();
+
+            // set isAvailable as a true for our books are avaialable
+            isAvailable[i] = true;
+        }
+    }
+
+    // this function for display all the book data
+
+    public static void displayBook()
+    {
+        for (int i = 0; i < 2; i++) 
+        {
+
+            System.out.println("sr.no \t Title \t Auther");
+            System.out.println(SrNo[i]);
+            System.out.print("\t" + Title[i]);
+            System.out.print("\t" + Author[i]);
+            System.out.println();
+            System.out.println("----------------------");
+        }
+    }
+
+    // this function for the return the book
+    public static void returnBook() 
+    {
+        // it will take serial no from user to return the book
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the serial number of the book to return: ");
+        int serialNumber = scanner.nextInt();
+
+        
+        //visit sr no upto serialno lenghth
+        for (int i = 0; i < SrNo.length; i++)
+        {
+            //if serial no is available then book is already available
+            if (SrNo[i] != serialNumber)
+             {
+                    isAvailable[i] = false;
+ 
+            }
+           
+        }
+         System.out.println("Book returned successfully.");
+
+       
+    }
+
+    // this function used to borrow the book 
+    public static void borrowBook() 
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the serial number of the book to borrow: ");
+        int serialNumber = scanner.nextInt();
+
+        boolean bookFound = false;
+        for (int i = 0; i < SrNo.length; i++) 
+        {
+            if (SrNo[i] == serialNumber) 
+            {
+                if (isAvailable[i]) 
+                {
+                    
+                    System.out.println("Book borrowed successfully.");
+                } 
+                else 
+                {
+                    System.out.println("Book is not available.");
+                }
+                bookFound = true;
+                break;
+            }
+        }
+
+        if (!bookFound) {
+            System.out.println("Book not found.");
+        }
+    }
+}
